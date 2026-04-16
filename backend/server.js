@@ -20,10 +20,20 @@ const app = express();
 connectDB();
 
 // ── MIDDLEWARE ──────────────────────────────────
-app.use(cors({
-  origin: 'http://localhost:3000',
-  credentials: true
-}));
+
+// ✅ UPDATED CORS (PRODUCTION READY)
+app.use(
+  cors({
+    origin: [
+      'http://localhost:3000',
+      'https://thefolio.vercel.app' // replace with your real Vercel URL
+    ],
+    credentials: true
+  })
+);
+
+// If testing only, you can temporarily use:
+// app.use(cors());
 
 app.use(express.json());
 
@@ -45,9 +55,10 @@ app.get('/api', (req, res) => {
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
 
+// ── DEBUG MIDDLEWARE (optional) ──────────────────
 app.use((req, res, next) => {
   console.log("Request:", req.method, req.url);
   next();
