@@ -36,20 +36,12 @@ const Navbar = () => {
           right: 0;
           z-index: 1000;
           box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-
-          /* ✨ FADE IN HEADER */
           animation: fadeDown 0.6s ease-out;
         }
 
         @keyframes fadeDown {
-          from {
-            opacity: 0;
-            transform: translateY(-20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          from { opacity: 0; transform: translateY(-20px); }
+          to { opacity: 1; transform: translateY(0); }
         }
 
         .navbar h1 {
@@ -71,19 +63,13 @@ const Navbar = () => {
           display: flex;
           align-items: center;
           gap: 6px;
-
           padding: 8px 12px;
           border-radius: 6px;
-
           font-size: 14px;
           color: white;
           text-decoration: none;
-
           background: rgba(255,255,255,0.12);
-
           transition: all 0.25s ease;
-
-          /* optional fade for items */
           animation: fadeItem 0.5s ease both;
         }
 
@@ -107,14 +93,11 @@ const Navbar = () => {
           display: flex;
           align-items: center;
           gap: 6px;
-
           padding: 8px 12px;
           border-radius: 6px;
           border: none;
-
           background: #ff0000;
           color: white;
-
           cursor: pointer;
           transition: all 0.25s ease;
         }
@@ -128,16 +111,9 @@ const Navbar = () => {
           transform: scale(0.95);
         }
 
-        /* ✨ ITEM FADE IN */
         @keyframes fadeItem {
-          from {
-            opacity: 0;
-            transform: translateY(-10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
         }
       `}</style>
 

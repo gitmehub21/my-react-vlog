@@ -16,39 +16,45 @@ const adminRoutes = require('./routes/admin.routes');
 
 const app = express();
 
-// ── DB CONNECTION ───────────────────────────────
+// ── DATABASE CONNECTION ─────────────────────────
 connectDB();
 
-// ── MIDDLEWARE ──────────────────────────────────
+// ── MIDDLEWARE ─────────────────────────────────
 
-// ✅ UPDATED CORS (PRODUCTION READY)
+// CORS (PRODUCTION READY)
 app.use(
   cors({
     origin: [
       'http://localhost:3000',
-      'https://thefolio.vercel.app' // replace with your real Vercel URL
+      'https://thefolio.vercel.app'
     ],
     credentials: true
   })
 );
 
-// If testing only, you can temporarily use:
+// If you want temporary open access (testing only):
 // app.use(cors());
 
 app.use(express.json());
 
-// Serve uploads
+// ── STATIC FILES (UPLOADS) ─────────────────────
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// ── ROUTES ───────────────────────────────────────
+// ── ROUTES ──────────────────────────────────────
 app.use('/api/auth', authRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/comments', commentRoutes);
 app.use('/api/admin', adminRoutes);
 
-// ── TEST ROUTE ───────────────────────────────────
+// ── TEST ROUTE ──────────────────────────────────
 app.get('/api', (req, res) => {
   res.send('API is running...');
+});
+
+// ── REQUEST LOGGER (OPTIONAL DEBUG) ────────────
+app.use((req, res, next) => {
+  console.log("Request:", req.method, req.url);
+  next();
 });
 
 // ── START SERVER ────────────────────────────────
@@ -56,10 +62,4 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-});
-
-// ── DEBUG MIDDLEWARE (optional) ──────────────────
-app.use((req, res, next) => {
-  console.log("Request:", req.method, req.url);
-  next();
 });
