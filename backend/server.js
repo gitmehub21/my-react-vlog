@@ -26,7 +26,7 @@ app.use(
   cors({
     origin: [
       'http://localhost:3000',
-      'https://thefolio.vercel.app'
+      'https://my-react-vlog.vercel.app'
     ],
     credentials: true
   })
